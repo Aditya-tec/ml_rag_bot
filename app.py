@@ -74,7 +74,7 @@ def main():
             "Number of sources to retrieve",
             min_value=3,
             max_value=10,
-            value=5,
+            value=10,
             help="More sources = more context but slower responses"
         )
         

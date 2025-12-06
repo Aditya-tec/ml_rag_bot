@@ -92,7 +92,7 @@ Answer:"""
         query_embedding = self.embedding_generator.embed_query(question)
         
         # Step 2: Retrieve relevant chunks
-        retrieved_chunks = self.retriever.search(query_embedding, top_k=top_k)
+        retrieved_chunks = self.retriever.search(query_embedding, top_k=10)
         
         # Step 3: Create context and prompt
         context = self.create_context(retrieved_chunks)
@@ -115,7 +115,7 @@ Answer:"""
             result["sources"] = [
                 {
                     "page": chunk["page_number"],
-                    "text": chunk["text"][:200] + "...",
+                    "text": "..." + chunk["text"][-300:],
                     "similarity": chunk["similarity_score"]
                 }
                 for chunk in retrieved_chunks
