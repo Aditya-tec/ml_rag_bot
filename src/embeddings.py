@@ -9,13 +9,11 @@ from typing import List, Dict
 class EmbeddingGenerator:
     """Generate and manage embeddings for text chunks."""
     
-    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+    def __init__(self, model_name: str = "all-mpnet-base-v2"):
         """
         Initialize embedding model.
         
-        Models:
-        - all-MiniLM-L6-v2: Fast, 384 dimensions (RECOMMENDED)
-        - all-mpnet-base-v2: Better quality, 768 dimensions (slower)
+       
         """
         print(f" Loading embedding model: {model_name}...")
         self.model = SentenceTransformer(model_name)
@@ -122,7 +120,7 @@ def main():
     print(f" Loaded {len(chunks)} chunks from {chunks_path}")
     
     # Initialize embedding generator
-    generator = EmbeddingGenerator(model_name="all-MiniLM-L6-v2")
+    generator = EmbeddingGenerator(model_name="all-mpnet-base-v2")
     
     # Generate embeddings
     embeddings = generator.generate_embeddings(chunks, batch_size=32)
