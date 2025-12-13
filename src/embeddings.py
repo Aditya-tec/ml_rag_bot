@@ -9,7 +9,7 @@ from typing import List, Dict
 class EmbeddingGenerator:
     """Generate and manage embeddings for text chunks."""
     
-    def __init__(self, model_name: str = "all-mpnet-base-v2"):
+    def __init__(self, model_name: str = "BAAI/bge-base-en-v1.5"):
         """
         Initialize embedding model.
         
@@ -120,7 +120,7 @@ def main():
     print(f" Loaded {len(chunks)} chunks from {chunks_path}")
     
     # Initialize embedding generator
-    generator = EmbeddingGenerator(model_name="all-mpnet-base-v2")
+    generator = EmbeddingGenerator(model_name= "BAAI/bge-base-en-v1.5")
     
     # Generate embeddings
     embeddings = generator.generate_embeddings(chunks, batch_size=32)

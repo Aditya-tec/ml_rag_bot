@@ -1,10 +1,10 @@
 import streamlit as st
 import os
-from src.rag_pipeline import RAGPipeline
+from src.rag_pipeline import EnhancedRAGPipeline 
 
 # Page config
 st.set_page_config(
-    page_title="Financial ML Q&A Bot",
+    page_title="Financial ML Q&A BOT",
     page_icon="📚",
     layout="wide"
 )
@@ -40,7 +40,7 @@ def load_rag_pipeline():
     """Load RAG pipeline (cached)."""
     try:
         api_key = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
-        return RAGPipeline(api_key=api_key)
+        return EnhancedRAGPipeline(api_key=api_key)
     except Exception as e:
         st.error(f"Error loading RAG pipeline: {str(e)}")
         st.stop()
@@ -48,9 +48,9 @@ def load_rag_pipeline():
 
 def main():
     # Header
-    st.markdown('<div class="main-header">📚 Financial ML Q&A Bot</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">📚 Financial ML Q&A BOT</div>', unsafe_allow_html=True)
     st.markdown(
-        '<div class="subtitle">Ask questions about "Advances in Financial Machine Learning" by Marcos Lopez de Prado</div>',
+        '<div class="subtitle">Ask questions about "Advances in Financial Machine Learning" - Marcos Lopez de Prado</div>',
         unsafe_allow_html=True
     )
     
@@ -64,7 +64,7 @@ def main():
         st.write("""
         This bot answers questions based on the book:
         **"Advances in Financial Machine Learning"**
-        by Marcos Lopez de Prado
+        
         """)
         
         st.divider()
@@ -109,7 +109,8 @@ def main():
                     for i, source in enumerate(message["sources"], 1):
                         st.markdown(f"**Source {i} - Page {source['page']}** (Similarity: {source['similarity']:.3f})")
                         if show_sources:
-                            st.markdown(f"```\n{source['text']}\n```")
+                            st.markdown(f"```\n{source['text_preview']}\n```")
+
     
     # Handle example question
     if "example_question" in st.session_state:
@@ -138,7 +139,7 @@ def main():
                     for i, source in enumerate(sources, 1):
                         st.markdown(f"**Source {i} - Page {source['page']}** (Similarity: {source['similarity']:.3f})")
                         if show_sources:
-                            st.markdown(f"```\n{source['text']}\n```")
+                            st.markdown(f"```\n{source['text_preview']}\n```")
         
         # Add assistant message
         st.session_state.messages.append({

@@ -48,7 +48,7 @@ class GroqRAGEvaluator:
         # Rate limiting for Gemini (used by RAG pipeline)
         self.gemini_requests = 0
         self.gemini_reset_time = time.time()
-        self.GEMINI_REQUESTS_PER_MINUTE = 6 # Conservative limit
+        self.GEMINI_REQUESTS_PER_MINUTE = 2 # Conservative limit
         self.GEMINI_WAIT_BETWEEN_CALLS = 12 # 7 seconds between calls
     
     def _wait_for_gemini_rate_limit(self):
